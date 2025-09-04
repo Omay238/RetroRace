@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://bxaj10015i1tx"]
+
+[ext_resource type="Script" uid="uid://dlomdquqiyfbs" path="res://player/player.gd" id="1_oul6g"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oul6g"]
+friction = 0.9
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oul6g"]
+points = PackedVector3Array(-1, 0, -2, 1, 0, -2, 1, 0, 2, -1, 0, 2, -1, 1, 2, 1, 1, 2)
+
+[sub_resource type="PrismMesh" id="PrismMesh_oul6g"]
+left_to_right = 0.0
+size = Vector3(4, 1, 2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oul6g"]
+height = 0.5
+
+[sub_resource type="Gradient" id="Gradient_oul6g"]
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rkbax"]
+gradient = SubResource("Gradient_oul6g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1dw6"]
+albedo_texture = SubResource("GradientTexture1D_rkbax")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rkbax"]
+material = SubResource("StandardMaterial3D_g1dw6")
+height = 0.5
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("FL_WHEEL_COL", "FR_WHEEL_COL", "BL_WHEEL_COL", "BR_WHEEL_COL", "FL_WHEEL_MESH", "FR_WHEEL_MESH", "BL_WHEEL_MESH", "BR_WHEEL_MESH")]
+mass = 200.0
+physics_material_override = SubResource("PhysicsMaterial_oul6g")
+script = ExtResource("1_oul6g")
+FL_WHEEL_COL = NodePath("FLWheelCol")
+FR_WHEEL_COL = NodePath("FRWheelCol")
+BL_WHEEL_COL = NodePath("BLWheelCol")
+BR_WHEEL_COL = NodePath("BRWheelCol")
+FL_WHEEL_MESH = NodePath("FLWheelMesh")
+FR_WHEEL_MESH = NodePath("FRWheelMesh")
+BL_WHEEL_MESH = NodePath("BLWheelMesh")
+BR_WHEEL_MESH = NodePath("BRWheelMesh")
+
+[node name="BodyCol" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_oul6g")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_oul6g")
+
+[node name="FLWheelCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.25, 0, -1.75)
+shape = SubResource("CylinderShape3D_oul6g")
+
+[node name="FLWheelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.25, 0, -1.75)
+mesh = SubResource("CylinderMesh_rkbax")
+skeleton = NodePath("")
+
+[node name="FRWheelCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.25, 0, -1.75)
+shape = SubResource("CylinderShape3D_oul6g")
+
+[node name="FRWheelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.25, 0, -1.75)
+mesh = SubResource("CylinderMesh_rkbax")
+skeleton = NodePath("")
+
+[node name="BLWheelCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.25, 0, 1.75)
+shape = SubResource("CylinderShape3D_oul6g")
+
+[node name="BLWheelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.25, 0, 1.75)
+mesh = SubResource("CylinderMesh_rkbax")
+skeleton = NodePath("")
+
+[node name="BRWheelCol" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.25, 0, 1.75)
+shape = SubResource("CylinderShape3D_oul6g")
+
+[node name="BRWheelMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.25, 0, 1.75)
+mesh = SubResource("CylinderMesh_rkbax")
+skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 4.044385, 7.141705)
